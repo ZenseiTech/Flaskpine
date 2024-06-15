@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export FLASK_APP=northwind.py
+export FLASK_APP=flaskpine.py
 
 export FLASK_DEBUG=1
 

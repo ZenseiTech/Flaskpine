@@ -1,4 +1,4 @@
-"""Northwind application setup."""
+"""Flaskpine application setup."""
 import os
 import sys
 
@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from flask_migrate import Migrate, upgrade
 
 from app import create_app, db
-from app.models import Category, Permission, Role, User
+from app.models import Author, Book
 
 dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
 if os.path.exists(dotenv_path):
@@ -27,13 +27,12 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    """Allow for access in flask shell the objects."""
+    """Allow for access in flask shell the objects
+    and for migration to see the models"""
     return dict(
         db=db,
-        User=User,
-        Role=Role,
-        Permission=Permission,
-        Category=Category,
+        Book=Book,
+        Author=Author
     )
 
 
@@ -88,22 +87,11 @@ def profile(length, profile_dir):
     app.run()
 
 
-@app.cli.command("load_data")
-def data_load():
-    """Call the load data to database."""
-    from db_backup import load_data
-
-    load_data.load(db, dropall=True)
-
-
 @app.cli.command()
 def deploy():
     """Run deployment tasks."""
     # migrate database to latest revision
     upgrade()
-
-    # create or update user roles
-    Role.insert_roles()
 
 
 def create_secret_token():

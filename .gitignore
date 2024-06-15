@@ -172,6 +172,6 @@ logs/**
 *.sqlite
 .fuse*
 
-northwind.sqlite
+flaskpine.sqlite
 ./db_backup/*.sqlite
 ./db_backup/logs
