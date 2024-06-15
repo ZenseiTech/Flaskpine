@@ -1,17 +1,26 @@
+"""Views from main."""
+
+from flask import render_template, request
+
 from app import db
-from flask import render_template, request, jsonify
-from app.models import Author, Book
 from app import logging as logger
+from app.models import Author, Book
+
 from . import main
+
 
 @main.route("/", methods=["GET"])
 def home():
-    books = db.session.query(Book, Author).filter(Book.author_id == Author.author_id).all()
+    """Start get endpoint."""
+    books = (
+        db.session.query(Book, Author).filter(Book.author_id == Author.author_id).all()
+    )
     return render_template("index.html", books=books)
 
 
 @main.route("/submit", methods=["POST"])
 def submit():
+    """Submission of a book."""
     global_book_object = Book()
 
     title = request.form["title"]
@@ -60,6 +69,7 @@ def submit():
 
 @main.route("/delete/<int:id>", methods=["DELETE"])
 def delete_book(id):
+    """Delete book by the passed id."""
     book = Book.query.get(id)
     db.session.delete(book)
     db.session.commit()
@@ -69,6 +79,7 @@ def delete_book(id):
 
 @main.route("/get-edit-form/<int:id>", methods=["GET"])
 def get_edit_form(id):
+    """Edit a book by passed id."""
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
@@ -88,8 +99,10 @@ def get_edit_form(id):
     """
     return response
 
+
 @main.route("/get-book-row/<int:id>", methods=["GET"])
 def get_book_row(id):
+    """Get book by id."""
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
@@ -113,9 +126,13 @@ def get_book_row(id):
     """
     return response
 
+
 @main.route("/update/<int:id>", methods=["PUT"])
 def update_book(id):
-    db.session.query(Book).filter(Book.book_id == id).update({"title": request.form["title"]})
+    """Upate book by id."""
+    db.session.query(Book).filter(Book.book_id == id).update(
+        {"title": request.form["title"]}
+    )
     db.session.commit()
 
     title = request.form["title"]
@@ -141,5 +158,3 @@ def update_book(id):
     </tr>
     """
     return response
-
-

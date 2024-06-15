@@ -27,13 +27,8 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    """Allow for access in flask shell the objects
-    and for migration to see the models"""
-    return dict(
-        db=db,
-        Book=Book,
-        Author=Author
-    )
+    """Allow for access in flask shell and for migration to see the models."""
+    return dict(db=db, Book=Book, Author=Author)
 
 
 @app.cli.command()
