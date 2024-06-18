@@ -1,0 +1,14 @@
+
+<tr id="{{book.book_id}}" x-data="{ title: '{{book.title}}' }">
+    <td><input name="title" value="{{book.title}}" x-model="title"/></td>
+    <td>{{author.name}}</td>
+    <td>
+        <a class="btn btn-primary" href="{{url_for('main.home')}}" x-target="{{book.book_id}}">Cancel</a>
+    </td>
+    <td>
+        <form x-init x-target="new-book" method="put" action="/update/{{id}}">
+            <input type="hidden" id="title" name="title" x-model="title">
+            <button class="btn btn-primary">Save</button>
+        </form>
+    </td>
+</tr>
