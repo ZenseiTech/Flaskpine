@@ -52,6 +52,9 @@ def submit():
 def delete_book(id):
     """Delete book by the passed id."""
     book = Book.query.get(id)
+    author = Author.query.filter_by(author_id=book.author_id).first()
+    if author:
+        db.session.delete(author)
     db.session.delete(book)
     db.session.commit()
 
@@ -75,4 +78,4 @@ def update_book(id):
     )
     db.session.commit()
 
-    return render_template("index.html", books=get_books())
+    return render_template("table-body.html", books=get_books())

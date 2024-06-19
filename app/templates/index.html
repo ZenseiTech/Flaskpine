@@ -31,8 +31,7 @@
 
 <body>
     <h1>Book Recommendations</h1>
-    <!-- <form hx-post="/submit" hx-swap="beforeend" hx-target="#new-book" class="mb-3"> -->
-    <form x-init x-target="new-book" method="post" class="mb-3" action="/submit">
+    <form id="form_data" x-init x-target="new-book form_data" method="post" class="mb-3" action="/submit">
         <input type="text" placeholder="Book Title" name="title" class="form-control mb-3" />
         <input type="text" placeholder="Book Author" name="author" class="form-control mb-3" />
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -45,22 +44,7 @@
             <th scope="col">Book Author</th>
           </tr>
         </thead>
-        <tbody id="new-book" x-init>
-            {%for book in books%}
-            <tr id="{{book.Book.book_id}}">
-                <td>{{book.Book.title}}</td>
-                <td>{{book.Author.name}}</td>
-                <td>
-                    <a class="btn btn-primary" href="/get-edit-form/{{book.Book.book_id}}" x-target="{{book.Book.book_id}}">Edit Title</a>
-                </td>
-                <td>
-                    <form x-target="new-book" method="delete" action="/delete/{{book.Book.book_id}}">
-                        <button class="btn btn-primary">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {%endfor%}
-        </tbody>
+            {% include 'table-body.html' %}
     </table>
 </body>
 

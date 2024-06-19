@@ -1,0 +1,16 @@
+<tbody id="new-book" x-init>
+    {%for book in books%}
+    <tr id="{{book.Book.book_id}}">
+        <td>{{book.Book.title}}</td>
+        <td>{{book.Author.name}}</td>
+        <td>
+            <a class="btn btn-primary" href="/get-edit-form/{{book.Book.book_id}}" x-target="{{book.Book.book_id}}">Edit Title</a>
+        </td>
+        <td>
+            <form x-target="new-book" method="delete" action="/delete/{{book.Book.book_id}}">
+                <button class="btn btn-primary">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {%endfor%}
+</tbody>
