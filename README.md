@@ -1,3 +1,9 @@
+** This is an app to check Alpine-Ajax**
+
+https://alpine-ajax.js.org/
+
+https://alpinejs.dev/
+
 **Build the requirements**:
 
 Create virtual environment
