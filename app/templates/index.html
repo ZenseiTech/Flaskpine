@@ -7,26 +7,8 @@
     <!-- AlpineJS Ajax -->
     <script defer src="https://cdn.jsdelivr.net/npm/@imacrayon/alpine-ajax@0.7.0/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
-    <style>
-        body{
-            padding: 20px;
-        }
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 
-        td, th {
-            border: 1px solid #383737;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 
 <body>
@@ -44,7 +26,7 @@
             <th scope="col">Book Author</th>
           </tr>
         </thead>
-            {% include 'table-body.html' %}
+            {% include '_table-body.html' %}
     </table>
 </body>
 

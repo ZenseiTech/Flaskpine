@@ -28,12 +28,12 @@ def submit():
     title = request.form["title"]
     author_name = request.form["author"]
 
-    author_exists = db.session.query(Author).filter(Author.name == author_name).first()
-    logger.debug(author_exists)
+    author = db.session.query(Author).filter(Author.name == author_name).first()
+    logger.debug(author)
 
     # check if author already exists in db
-    if author_exists:
-        author_id = author_exists.author_id
+    if author:
+        author_id = author.author_id
         book = Book.query.filter_by(author_id=author_id).first()
         book.title = title
         db.session.commit()
