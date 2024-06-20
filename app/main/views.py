@@ -78,4 +78,4 @@ def update_book(id):
     )
     db.session.commit()
 
-    return render_template("table-body.html", books=get_books())
+    return render_template("_table-body.html", books=get_books())
